@@ -1,5 +1,7 @@
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:onlinecourse_ui/data/course_details_data.dart';
 import 'package:onlinecourse_ui/utils/colors.dart';
 import 'package:onlinecourse_ui/utils/textSize.dart';
@@ -32,6 +34,7 @@ class CourseDetails extends StatelessWidget {
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
+              flickManager.flickControlManager?.mute();
               Navigator.pop(context);
             },
             icon: const SizedBox(
@@ -43,8 +46,8 @@ class CourseDetails extends StatelessWidget {
           ),
         ),
         body: SingleChildScrollView(
-          physics:
-              AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics()),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
@@ -54,8 +57,9 @@ class CourseDetails extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    child: AspectRatio(aspectRatio: 16/9,
-                    child: FlickVideoPlayer(flickManager: flickManager),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: FlickVideoPlayer(flickManager: flickManager),
                     ),
                     height: screenSize.height * .3,
                     width: double.infinity,
@@ -136,10 +140,11 @@ class CourseDetails extends StatelessWidget {
                       onTap: () {},
                     ),
                     customBtn(
+                      textColor: primaryColor,
+                      color: Colors.white,
                       size: screenSize,
                       text: "Description",
                       onTap: () {},
-                      //color: Colors.white,
                     ),
                   ],
                 ),
@@ -194,13 +199,50 @@ class CourseDetails extends StatelessWidget {
                                 Icons.check,
                                 color: Colors.white,
                                 size: 15,
-                              )),
+                              ),
+                            ),
                     );
                   },
-                )
+                ),
               ],
             ),
           ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            
+            customBtn(
+              textColor: primaryColor,
+              color: Colors.white,
+              size: screenSize,
+              text: "Enroll Now",
+              onTap: () {},
+            ),
+
+
+            //  const SizedBox(
+            //   width: 15,
+            // ),
+
+            FloatingActionButton(
+              child: customBtn(
+                icon: Icon(
+                  Icons.call,
+                  color: Colors.white,
+                ),
+                size: screenSize,
+                onTap: () {},
+              ),
+              onPressed: () {},
+            ),
+
+           
+
+            
+          ],
         ),
       ),
     );
